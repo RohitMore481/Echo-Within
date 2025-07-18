@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.99, y: -270.5}
+  m_AnchoredPosition: {x: -2.6, y: -270.5}
   m_SizeDelta: {x: 170.2842, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &437139777
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9164b1d1818acba4882a48144afd8b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Sound Menu
+  sceneToLoad: Levels Menu
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9164b1d1818acba4882a48144afd8b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Controls Menu
+  sceneToLoad: Options Menu
 --- !u!1 &956992439
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,7 +694,7 @@ GameObject:
   - component: {fileID: 1036599623}
   - component: {fileID: 1036599622}
   m_Layer: 5
-  m_Name: Back Text
+  m_Name: Exit Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -754,7 +754,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Back
+  m_text: 'Exit
 
 '
   m_isRightToLeft: 0
@@ -930,7 +930,7 @@ GameObject:
   - component: {fileID: 1114655861}
   - component: {fileID: 1114655860}
   m_Layer: 5
-  m_Name: Sound Text
+  m_Name: Start Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1153,7 +1153,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1381800768}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadSceneByName
+        m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1213,7 +1213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9164b1d1818acba4882a48144afd8b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Main Menu
+  sceneToLoad: 
 --- !u!1 &1450605690
 GameObject:
   m_ObjectHideFlags: 0
