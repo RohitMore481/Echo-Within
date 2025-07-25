@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
+
+
 public class GridPlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
@@ -25,6 +27,8 @@ public class GridPlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         baseRotation = transform.rotation;
+
+        PrintGridPosition(); // Print starting grid position
     }
 
     void Update()
@@ -36,17 +40,12 @@ public class GridPlayerController : MonoBehaviour
             {
                 Vector2 direction = input.normalized;
 
-                // Rotate IMMEDIATELY based on input direction
-                if (direction == Vector2.down)        // S
-                    baseRotation = Quaternion.Euler(0f, 0f, 0f);
-                else if (direction == Vector2.right)  // D
-                    baseRotation = Quaternion.Euler(0f, 0f, 90f);
-                else if (direction == Vector2.up)     // W
-                    baseRotation = Quaternion.Euler(0f, 0f, 180f);
-                else if (direction == Vector2.left)   // A
-                    baseRotation = Quaternion.Euler(0f, 0f, 270f);
+                // Rotate based on direction
+                if (direction == Vector2.down)        baseRotation = Quaternion.Euler(0f, 0f, 0f);
+                else if (direction == Vector2.right)  baseRotation = Quaternion.Euler(0f, 0f, 90f);
+                else if (direction == Vector2.up)     baseRotation = Quaternion.Euler(0f, 0f, 180f);
+                else if (direction == Vector2.left)   baseRotation = Quaternion.Euler(0f, 0f, 270f);
 
-                // Apply immediately to reflect facing even if blocked
                 transform.rotation = baseRotation;
 
                 Vector2 destination = rb.position + direction;
@@ -78,11 +77,6 @@ public class GridPlayerController : MonoBehaviour
         RaycastHit2D[] results = new RaycastHit2D[1];
         int hitCount = col.Cast(direction, filter, results, 1f);
 
-        if (hitCount > 0)
-        {
-            Debug.Log("Blocked by: " + results[0].collider.name);
-        }
-
         return hitCount == 0;
     }
 
@@ -94,7 +88,7 @@ public class GridPlayerController : MonoBehaviour
         float elapsed = 0f;
         float duration = 1f / moveSpeed;
 
-        // Tilt the player in chosen axis while moving
+        // Tilt during movement
         Quaternion tiltRotation = GetTiltRotation(direction);
         transform.rotation = tiltRotation * baseRotation;
 
@@ -107,8 +101,10 @@ public class GridPlayerController : MonoBehaviour
         }
 
         rb.MovePosition(destination);
-        transform.rotation = baseRotation; // Stay facing final direction
+        transform.rotation = baseRotation;
         isMoving = false;
+
+        PrintGridPosition();
     }
 
     Quaternion GetTiltRotation(Vector2 direction)
@@ -131,5 +127,12 @@ public class GridPlayerController : MonoBehaviour
             case RotationAxis.Z: return Quaternion.Euler(0f, 0f, angle);
             default: return Quaternion.identity;
         }
+    }
+
+    void PrintGridPosition()
+    {
+        int x = Mathf.RoundToInt(transform.position.x);
+        int y = Mathf.RoundToInt(transform.position.y);
+        Debug.Log($"Player Grid Position: ({x}, {y})");
     }
 }
