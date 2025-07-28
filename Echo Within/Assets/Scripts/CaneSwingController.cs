@@ -22,16 +22,19 @@ public class CaneSwingController : MonoBehaviour
 
     void Update()
     {
+        // LEFT swing (Q)
         if (Input.GetKeyDown(KeyCode.Q))
         {
             CaneWallDetector.lastCaneDirection = CaneWallDetector.CaneDirection.Left;
             StartSwing(forearm, forearmLeftAngle);
         }
+        // RIGHT swing (E)
         else if (Input.GetKeyDown(KeyCode.E))
         {
             CaneWallDetector.lastCaneDirection = CaneWallDetector.CaneDirection.Right;
             StartSwing(arm, armRightAngle);
         }
+        // FORWARD poke (F)
         else if (Input.GetKeyDown(KeyCode.F) && !isPoking)
         {
             CaneWallDetector.lastCaneDirection = CaneWallDetector.CaneDirection.Center;
@@ -41,7 +44,7 @@ public class CaneSwingController : MonoBehaviour
 
     void StartSwing(Transform part, float angle)
     {
-        StopAllCoroutines();
+        StopAllCoroutines(); // Optional: stop existing swing before starting new
         StartCoroutine(SwingPart(part, angle));
     }
 
@@ -52,7 +55,7 @@ public class CaneSwingController : MonoBehaviour
         Quaternion startRot = part.localRotation;
         Quaternion targetRot = Quaternion.Euler(0, 0, angle);
 
-        // Swing Out
+        // Swing out
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime * swingSpeed;
@@ -63,7 +66,7 @@ public class CaneSwingController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         elapsed = 0f;
 
-        // Return
+        // Return to start
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime * swingSpeed;
@@ -79,7 +82,7 @@ public class CaneSwingController : MonoBehaviour
         isPoking = true;
 
         Vector3 startPos = caneTip.localPosition;
-        Vector3 targetPos = startPos + new Vector3(0f, pokeDistance, 0f);
+        Vector3 targetPos = startPos + new Vector3(0f, pokeDistance, 0f); // adjust as per orientation
 
         float elapsed = 0f;
         while (elapsed < pokeDuration)

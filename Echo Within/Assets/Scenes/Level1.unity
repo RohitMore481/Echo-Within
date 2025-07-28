@@ -24767,8 +24767,8 @@ Transform:
   m_GameObject: {fileID: 564903469}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.009068014, w: 0.99995893}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.029897463, y: 0.029897463, z: 0.029897463}
+  m_LocalPosition: {x: -0.044, y: 0.032, z: 0}
+  m_LocalScale: {x: 0.031377386, y: 0.031377386, z: 0.031377386}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 976183123}
@@ -24791,7 +24791,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   tiltAngle: 25
-  wallTilemap: {fileID: 1104442973}
   upAxis: 0
   downAxis: 0
   leftAxis: 1
@@ -25094,7 +25093,7 @@ GameObject:
   - component: {fileID: 1104442971}
   - component: {fileID: 1104442970}
   - component: {fileID: 1104442969}
-  - component: {fileID: 1104442974}
+  - component: {fileID: 1104442975}
   m_Layer: 6
   m_Name: Wall Tilemap
   m_TagString: Wall
@@ -34264,7 +34263,7 @@ TilemapCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
@@ -37735,7 +37734,7 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1104442974
+--- !u!114 &1104442975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37744,13 +37743,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1104442967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 807df5cce579d634d87b8e9b403174e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 9aa0fc69a332d7645b0a4bfcb06aaed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallTilemap: {fileID: 1104442973}
-  visibleDuration: 2
-  fadedColor: {r: 1, g: 1, b: 1, a: 0.1}
-  visibleColor: {r: 1, g: 1, b: 1, a: 1}
+  fadeDuration: 0.5
+  visibleDuration: 7
 --- !u!1 &1136124856
 GameObject:
   m_ObjectHideFlags: 0
@@ -37795,6 +37792,52 @@ Transform:
   m_Children:
   - {fileID: 1104442968}
   - {fileID: 196548835}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1723964983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1723964985}
+  - component: {fileID: 1723964984}
+  m_Layer: 0
+  m_Name: Player Tracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1723964984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723964983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8ef6a6d9836b947860bbad31176e36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 1104442973}
+  player: {fileID: 564903470}
+--- !u!4 &1723964985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723964983}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.40042204, y: -1.7119467, z: -0.009039875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1763886718
@@ -37925,7 +37968,7 @@ GameObject:
   - component: {fileID: 2037190645}
   - component: {fileID: 2037190646}
   - component: {fileID: 2037190648}
-  - component: {fileID: 2037190647}
+  - component: {fileID: 2037190649}
   m_Layer: 0
   m_Name: cane
   m_TagString: Untagged
@@ -38000,19 +38043,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2037190647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2037190644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4bc754d95956a64694c8b628f066d1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeOnTouch: {fileID: 0}
 --- !u!70 &2037190648
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -38048,6 +38078,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0.08, y: -1.24}
   m_Size: {x: 0.2, y: 1.88}
   m_Direction: 0
+--- !u!114 &2037190649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037190644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4bc754d95956a64694c8b628f066d1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -38055,3 +38097,4 @@ SceneRoots:
   - {fileID: 631133792}
   - {fileID: 1136124858}
   - {fileID: 564903470}
+  - {fileID: 1723964985}

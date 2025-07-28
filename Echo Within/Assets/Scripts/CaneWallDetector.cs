@@ -1,48 +1,45 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class CaneWallDetector : MonoBehaviour
 {
     public enum CaneDirection
     {
-        Left, Right, Up, Down, Center
+        Left,
+        Right,
+        Center
     }
 
-    public static CaneDirection lastCaneDirection = CaneDirection.Down;
+    public static CaneDirection lastCaneDirection = CaneDirection.Center;
 
-    public FadeOnTouch fadeOnTouch;
+    private Tilemap wallTilemap;
 
-    private void Start()
+    void Start()
     {
-        if (fadeOnTouch == null)
-            fadeOnTouch = FindObjectOfType<FadeOnTouch>();
-    }
+        wallTilemap = GameObject.Find("Wall Tilemap").GetComponent<Tilemap>();
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.W)) lastCaneDirection = CaneDirection.Up;
-        if (Input.GetKeyDown(KeyCode.S)) lastCaneDirection = CaneDirection.Down;
-        if (Input.GetKeyDown(KeyCode.A)) lastCaneDirection = CaneDirection.Left;
-        if (Input.GetKeyDown(KeyCode.D)) lastCaneDirection = CaneDirection.Right;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Wall"))
+        if (wallTilemap == null)
         {
-            Vector2 direction = DirectionToVector(lastCaneDirection);
-            fadeOnTouch?.FadeTileInDirection(transform.position, direction);
+            Debug.LogError("Wall Tilemap not found! Make sure it's named exactly 'Wall Tilemap'");
         }
     }
 
-    private Vector2 DirectionToVector(CaneDirection dir)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        switch (dir)
+        if (collision.CompareTag("Wall"))
         {
-            case CaneDirection.Up: return Vector2.up;
-            case CaneDirection.Down: return Vector2.down;
-            case CaneDirection.Left: return Vector2.left;
-            case CaneDirection.Right: return Vector2.right;
-            default: return Vector2.zero;
+            Vector3 worldPos = transform.position;
+            Vector3Int gridPos = wallTilemap.WorldToCell(worldPos);
+
+            string directionText = lastCaneDirection.ToString();
+            Debug.Log($"Cane touched tile at Grid Position: {gridPos}, Direction: {directionText}");
+
+            // Optional: fade the tile on touch
+            TileFader tileFader = collision.GetComponent<TileFader>();
+            if (tileFader != null)
+            {
+                tileFader.FadeSelf(); // Make sure FadeSelf exists
+            }
         }
     }
 }
